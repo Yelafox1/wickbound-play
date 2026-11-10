@@ -40,5 +40,5 @@ body:
   - type: textarea
     id: broken
     attributes:
-      label: Anything broken or stuttering? One line each.
-      placeholder: "- enemies froze at 7:10"
+      label: Anything broken or stuttering? Any questions for the dev?
+      placeholder: "- enemies froze at 7:10\n- Q: how do evolutions work?"
