@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wickbound playtest: feedback</title>
+<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+<link rel="stylesheet" href="./site.css" />
+</head>
+<body><main>
+<p class="kicker">Playtest slice</p>
+<h1>Feedback</h1>
+<p class="muted">Short answers are perfect. Skip art, sound, the title, the Sexton sprite and menus.</p>
+<form id="f">
+<label for="result">Did you win or die? If you died, what time did it say?</label>
+<input id="result" name="result" required placeholder="e.g. died at 6:40" />
+<label for="boss">Did you reach the boss (the Pale Bell at 8:00)? Too easy, fair or too hard?</label>
+<input id="boss" name="boss" required placeholder="e.g. reached it, fair" />
+<label for="boring">When, if ever, did it feel boring or too easy? Roughly what time?</label>
+<input id="boring" name="boring" placeholder="e.g. never / around 5:00" />
+<label for="wax">Did you understand the wax/light rule without help? (yes/no)</label>
+<input id="wax" name="wax" required placeholder="yes or no" />
+<label for="lean">Did you build Bright or Ember, and did it feel different?</label>
+<input id="lean" name="lean" placeholder="e.g. Bright, yes it felt different" />
+<label for="broken">Anything broken or stuttering? One line each.</label>
+<textarea id="broken" name="broken" placeholder="- enemies froze at 7:10"></textarea>
+<div class="nav">
+<button class="btn" type="submit">Send via GitHub</button>
+<button class="btn ghost" type="button" id="copy">Copy my answers</button>
+</div>
+<p class="muted" id="msg">No GitHub? Post your answers in the Wickbound Discord. Use “Copy my answers” and paste them there.</p>
+</form>
+<div class="nav"><a class="btn ghost" href="./">Play</a><a class="btn ghost" href="./faq.html">FAQ</a></div>
+<script>
+const ids = ["result", "boss", "boring", "wax", "lean", "broken"];
+const qs = Object.fromEntries(ids.map((i) => [i, document.querySelector(`label[for=${i}]`).textContent]));
+const val = (i) => document.getElementById(i).value.trim();
+document.getElementById("f").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const p = new URLSearchParams({ template: "playtest.yml", title: `Playtest: ${val("result") || "run"}`.slice(0, 80) });
+  for (const i of ids) if (val(i)) p.set(i, val(i));
+  window.open(`https://github.com/Yelafox1/wickbound-play/issues/new?${p}`, "_blank", "noopener");
+});
+document.getElementById("copy").addEventListener("click", async () => {
+  const text = "Wickbound playtest\n" + ids.map((i, n) => `${n + 1}. ${qs[i]} ${val(i) || "-"}`).join("\n");
+  try { await navigator.clipboard.writeText(text); document.getElementById("msg").textContent = "Copied. Paste it in the Wickbound Discord."; }
+  catch { prompt("Copy your answers:", text); }
+});
+</script>
+</main></body>
+</html>

@@ -1,0 +1,44 @@
+name: Playtest feedback
+description: Answers after one run of the Wickbound playtest slice.
+title: "Playtest: "
+labels: ["playtest"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for playing! Short answers are perfect. Skip art, sound, title, the Sexton sprite and menus. Those are placeholders."
+  - type: input
+    id: result
+    attributes:
+      label: Did you win or die? If you died, what time did it say?
+      placeholder: "e.g. died at 6:40"
+    validations:
+      required: true
+  - type: input
+    id: boss
+    attributes:
+      label: Did you reach the boss (the Pale Bell at 8:00)? Too easy, fair or too hard?
+      placeholder: "e.g. reached it, fair"
+    validations:
+      required: true
+  - type: input
+    id: boring
+    attributes:
+      label: When, if ever, did it feel boring or too easy? Roughly what time?
+      placeholder: "e.g. never / around 5:00"
+  - type: input
+    id: wax
+    attributes:
+      label: Did you understand the wax/light rule without help? (yes/no)
+      placeholder: "yes or no"
+    validations:
+      required: true
+  - type: input
+    id: lean
+    attributes:
+      label: Did you build Bright or Ember, and did it feel different?
+      placeholder: "e.g. Bright, yes it felt different"
+  - type: textarea
+    id: broken
+    attributes:
+      label: Anything broken or stuttering? One line each.
+      placeholder: "- enemies froze at 7:10"
