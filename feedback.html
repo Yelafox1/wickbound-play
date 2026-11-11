@@ -11,6 +11,8 @@
 <h1>Feedback</h1>
 <p class="muted">Short answers are perfect. Skip art, sound, the title, the Sexton sprite and menus.</p>
 <form id="f">
+<label for="version">Game version (the "build" code on the end screen, title or pause screen)</label>
+<input id="version" name="version" placeholder="e.g. 71d1dfe" />
 <label for="result">Did you win or die? If you died, what time did it say?</label>
 <input id="result" name="result" required placeholder="e.g. died at 6:40" />
 <label for="boss">Did you reach the boss (the Pale Bell at 8:00)? Too easy, fair or too hard?</label>
@@ -19,7 +21,17 @@
 <input id="boring" name="boring" placeholder="e.g. never / around 5:00" />
 <label for="wax">Did you understand the wax/light rule without help? (yes/no)</label>
 <input id="wax" name="wax" required placeholder="yes or no" />
-<label for="lean">Did you build Bright or Ember, and did it feel different?</label>
+<label for="build">Which build did you play?</label>
+<select id="build" name="build">
+<option value="">Pick one</option>
+<option>Bright</option>
+<option>Ember</option>
+<option>Hybrid (both)</option>
+<option>Not sure</option>
+</select>
+<label for="tries">How many tries until your first win?</label>
+<input id="tries" name="tries" placeholder="a number, or 'not won yet'" />
+<label for="lean">Did you build Bright, Ember or Hybrid, and did it feel different?</label>
 <input id="lean" name="lean" placeholder="e.g. Bright, yes it felt different" />
 <label for="broken">Anything broken or stuttering? Any questions for the dev?</label>
 <textarea id="broken" name="broken" placeholder="- enemies froze at 7:10&#10;- Q: how do evolutions work?"></textarea>
@@ -31,7 +43,15 @@
 </form>
 <div class="nav"><a class="btn ghost" href="./">Play</a><a class="btn ghost" href="./faq.html">FAQ</a></div>
 <script>
-const ids = ["result", "boss", "boring", "wax", "lean", "broken"];
+const ids = ["version", "result", "boss", "boring", "wax", "build", "tries", "lean", "broken"];
+// Pre-fill from the game's end-screen link (?version=&result=&boss=&build=&tries=).
+const pre = new URLSearchParams(location.search);
+for (const i of ids) {
+  let v = pre.get(i);
+  if (!v) continue;
+  if (i === "build" && v === "Hybrid") v = "Hybrid (both)";
+  document.getElementById(i).value = v;
+}
 const qs = Object.fromEntries(ids.map((i) => [i, document.querySelector(`label[for=${i}]`).textContent]));
 const val = (i) => document.getElementById(i).value.trim();
 document.getElementById("f").addEventListener("submit", (e) => {

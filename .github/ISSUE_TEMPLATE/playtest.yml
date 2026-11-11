@@ -7,6 +7,11 @@ body:
     attributes:
       value: "Thanks for playing! Short answers are perfect. Skip art, sound, title, the Sexton sprite and menus. Those are placeholders."
   - type: input
+    id: version
+    attributes:
+      label: Game version (the "build" code on the end screen, title or pause screen)
+      placeholder: "e.g. 71d1dfe"
+  - type: input
     id: result
     attributes:
       label: Did you win or die? If you died, what time did it say?
@@ -32,10 +37,24 @@ body:
       placeholder: "yes or no"
     validations:
       required: true
+  - type: dropdown
+    id: build
+    attributes:
+      label: Which build did you play?
+      options:
+        - Bright
+        - Ember
+        - Hybrid (both)
+        - Not sure
+  - type: input
+    id: tries
+    attributes:
+      label: How many tries until your first win?
+      placeholder: "a number, or 'not won yet'"
   - type: input
     id: lean
     attributes:
-      label: Did you build Bright or Ember, and did it feel different?
+      label: Did you build Bright, Ember or Hybrid, and did it feel different?
       placeholder: "e.g. Bright, yes it felt different"
   - type: textarea
     id: broken

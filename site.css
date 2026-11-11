@@ -16,6 +16,6 @@ kbd { background: #2a2219; border: 1px solid var(--border); border-radius: 4px; 
 .btn { display: inline-block; background: var(--wick); color: #1a120a; border: 0; border-radius: 999px; padding: 10px 20px; font: 600 15px "Source Sans 3", sans-serif; text-decoration: none; cursor: pointer; }
 .btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--border); }
 label { display: block; font-weight: 600; margin: 18px 0 6px; }
-input, textarea { width: 100%; background: #120f0c; color: var(--fg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font: 15px "Source Sans 3", sans-serif; }
+input, textarea, select { width: 100%; background: #120f0c; color: var(--fg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font: 15px "Source Sans 3", sans-serif; }
 textarea { min-height: 90px; }
-input:focus, textarea:focus { outline: 2px solid var(--wick); border-color: transparent; }
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--wick); border-color: transparent; }
